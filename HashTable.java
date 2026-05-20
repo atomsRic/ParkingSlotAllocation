@@ -22,10 +22,6 @@ public class HashTable {
     // Public API
     // ---------------------------------------------------------------
 
-    /**
-     * Insert or update a slot keyed by slotId — O(1) average.
-     * Uses linear probing to resolve collisions.
-     */
     public void put(int key, ParkingSlot value) {
         if ((double) size / capacity >= LOAD_FACTOR) resize();
 
@@ -74,9 +70,9 @@ public class HashTable {
         for (int i = 0; i < capacity; i++) {
             int probe = (idx + i) % capacity;
 
-            if (table[probe] == null)    return null;          // definitively absent
-            if (table[probe] == DELETED) continue;             // skip tombstone
-            if (keys[probe]  == key)     return table[probe];  // found
+            if (table[probe] == null)    return null;          
+            if (table[probe] == DELETED) continue;             
+            if (keys[probe]  == key)     return table[probe];  
         }
         return null;
     }
@@ -95,7 +91,7 @@ public class HashTable {
             if (table[probe] == DELETED) continue;
 
             if (keys[probe] == key) {
-                table[probe] = DELETED;   // tombstone — keeps probe chain intact
+                table[probe] = DELETED;   
                 size--;
                 return;
             }

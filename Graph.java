@@ -14,7 +14,7 @@ public class Graph {
     
     public void addEdge(int u, int v, double weight) {
         adjList.get(u).put(v, weight);
-        adjList.get(v).put(u, weight); // Undirected
+        adjList.get(v).put(u, weight); 
     }
     
     // Dijkstra's Algorithm - O((V+E) log V)

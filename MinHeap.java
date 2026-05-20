@@ -6,7 +6,7 @@ public class MinHeap {
     private int      capacity;
 
     public MinHeap(int capacity) {
-        this.capacity   = capacity + 1;   // small buffer
+        this.capacity   = capacity + 1;   
         this.priorities = new double[this.capacity];
         this.slotIds    = new int[this.capacity];
         this.size       = 0;
@@ -39,19 +39,13 @@ public class MinHeap {
         return result;
     }
 
-    /**
-     * FIX — Remove a specific slot by its ID — O(n) scan + O(log n) fix.
-     * This replaces the full heap-rebuild that was previously called after
-     * every allocation. Worst case is still O(n) for the scan, but we only
-     * pay that cost once per removal instead of rebuilding from scratch.
-     */
     public void remove(int slotId) {
         // Find the slot's position in the heap array
         int idx = -1;
         for (int i = 0; i < size; i++) {
             if (slotIds[i] == slotId) { idx = i; break; }
         }
-        if (idx == -1) return; // not found, nothing to do
+        if (idx == -1) return; 
 
         // Replace with last element and restore heap property
         size--;
