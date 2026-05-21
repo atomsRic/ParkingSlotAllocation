@@ -77,6 +77,7 @@ public class OptimizedParkingSystem {
             return -1;
 
         // Keep extracting until we find a slot that is still marked available
+        // (handles edge case where slot was manually occupied externally)
         while (!priorityQueue.isEmpty()) {
             int bestSlot = priorityQueue.extractMin();
             ParkingSlot slot = slotTable.get(bestSlot);
@@ -145,7 +146,7 @@ public class OptimizedParkingSystem {
         }
     }
 
-    /** Stats include separate per-operation timing. */
+    /** FIX 3: Stats now include separate per-operation timing. */
     public void showStatsGUI(JTextArea area) {
         area.append("=== SYSTEM STATS ===\n");
         area.append(String.format("Total Slots : %d\n", totalSlots));
@@ -199,7 +200,7 @@ public class OptimizedParkingSystem {
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            reader.readLine(); 
+            reader.readLine(); // skip header
             String line;
             slotTable = new HashTable(totalSlots * 2);
             availableSlots = 0;
